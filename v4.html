@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+  <head>
+    <script type="text/javascript" src="https://websdk.socure.com/bundle.js"></script>
+    <script type="text/javascript">
+      var sdkInitiated = false
+      
+      function onProgress(progress) {
+          console.log(progress);
+          console.log('progress')
+      }
+      function onSuccess(response) {
+          console.log(response);
+          console.log('success');
+      }
+      function onError(error) {
+          console.log(error);
+          console.log('error');
+      }
+      
+      var config = {
+          onProgress: onProgress, //callback method for reading the progress status
+          onSuccess: onSuccess, //callback method to read the success response
+          onError: onError, //callback method to read the error response
+          qrCodeNeeded: true
+      };
+      
+      function start() {
+      
+        // Call Reset If they initialized ONCE
+        if (sdkInitiated) {
+            clearSession();
+            console.log('cleaned');
+            sdkInitiated = false;
+        }
+      
+        SocureInitializer.init("57828230-62f3-411e-8d49-2b17402292ba")
+          .then(lib => {
+              lib.init("57828230-62f3-411e-8d49-2b17402292ba", "#websdk", config).then(function () {
+                  lib.start(1).then(function (response) {
+                      console.log(response.referenceId)
+                      sdkInitiated = true;
+                  },
+                      function (error) {
+                          console.log(error);
+                      }
+                  );
+              });
+          });
+      };
+      
+      function clearSession() {
+        Socure.reset(); 
+        Socure.unmount();
+        sessionStorage.removeItem('documentVerificationToken');
+        sessionStorage.removeItem('publicApiKey');
+        localStorage.removeItem('devicer_id');
+        console.log("Socure DocV Session cleaned!")
+      }
+      
+    </script>
+  </head>
+  <body>
+    <button onclick="start()">Start</button>
+    <div id="websdk"></div>
+    <script>
+        //Replace with your key above
+            
+    </script>
+  </body>
+</html>
