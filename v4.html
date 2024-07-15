@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <script type="text/javascript" src="https://websdk.socure.us/bundle.js"></script>
+    <script type="text/javascript" src="https://websdk.socure.com/bundle.js"></script>
     <script type="text/javascript">
       var sdkInitiated = false
       
@@ -34,9 +34,9 @@
             sdkInitiated = false;
         }
       
-        SocureInitializer.init("9c58a0c2-fefc-4ac5-a0f0-c35d07955c41")
+        SocureInitializer.init("57828230-62f3-411e-8d49-2b17402292ba")
           .then(lib => {
-              lib.init("9c58a0c2-fefc-4ac5-a0f0-c35d07955c41", "#websdk", config).then(function () {
+              lib.init("57828230-62f3-411e-8d49-2b17402292ba", "#websdk", config).then(function () {
                   lib.start(1).then(function (response) {
                       console.log(response.referenceId)
                       sdkInitiated = true;
